@@ -5,6 +5,8 @@
  */
 package UsuarioModelo;
 
+import java.sql.Date;
+
 /**
  *
  * @author juansantana
@@ -13,8 +15,9 @@ public class UsuarioModelo {
     
     private String Nombre;
     private String Equipo;
-    private int    Edad;
+    private Date   Nacimiento;
     private String Ruta;
+    private int    idpersona;
 
     /**
      * @return the Nombre
@@ -44,19 +47,7 @@ public class UsuarioModelo {
         this.Equipo = Equipo;
     }
 
-    /**
-     * @return the Edad
-     */
-    public int getEdad() {
-        return Edad;
-    }
-
-    /**
-     * @param Edad the Edad to set
-     */
-    public void setEdad(int Edad) {
-        this.Edad = Edad;
-    }
+   
 
     /**
      * @return the Ruta
@@ -71,5 +62,34 @@ public class UsuarioModelo {
     public void setRuta(String Ruta) {
         this.Ruta = Ruta;
     }
+
+    /**
+     * @return the idpersona
+     */
+    public int getIdpersona() {
+        return idpersona;
+    }
+
+    /**
+     * @param idpersona the idpersona to set
+     */
+    public void setIdpersona(int idpersona) {
+        this.idpersona = idpersona;
+    }
+
+    /**
+     * @return the Nacimiento
+     */
+    public Date getNacimiento() {
+        return Nacimiento;
+    }
+
+    /**
+     * @param Nacimiento the Nacimiento to set
+     */
+    public void setNacimiento(Date Nacimiento) {
+        this.Nacimiento = Nacimiento;
+    }
     
 }
+
