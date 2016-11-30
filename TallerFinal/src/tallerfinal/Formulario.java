@@ -102,6 +102,7 @@ public class Formulario extends javax.swing.JFrame {
     private void Actualizar() {
         UsuarioModelo modelo = new UsuarioModelo();
         modelo.setNombre(txtNombre.getText());
+        modelo.setEquipo(cbEquipo.getSelectedItem().toString());
         modelo.setRuta(txtRuta.getText());
         modelo.setIdpersona(Integer.parseInt(txtIdPersona.getText()));
         modelo.setNacimiento(java.sql.Date.valueOf(txtNacimiento.getText()));
@@ -134,8 +135,9 @@ public class Formulario extends javax.swing.JFrame {
                 String strNombreImagen = imagenSeleccionada.getName();
                 
                 
-                //String Ruta="C:\\Archivos\\imagen.png" + strNombreImagen;  
-                String Ruta="C:\\Archivos\\" + strNombreImagen;  
+                //String Ruta="C:\\Archivos\\imagen.png" + strNombreImagen; 
+                //String Ruta="C:\\Archivos\\" + strNombreImagen;  
+                String Ruta="/home/juansantana/Archivos/" + strNombreImagen;  
                 
                 char Arreglo[]=strNombreImagen.toCharArray();
                 int punto = 0;
@@ -422,13 +424,13 @@ public class Formulario extends javax.swing.JFrame {
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         // TODO add your handling code here:
-         Actualizar();
+        Actualizar();
         Mostrar();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         // TODO add your handling code here:
-         Eliminar();
+        Eliminar();
         Mostrar();
     }//GEN-LAST:event_btnBorrarActionPerformed
 
