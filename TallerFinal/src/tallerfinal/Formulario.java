@@ -9,10 +9,14 @@ import UsuarioAdmin.UsuarioAdmin;
 import UsuarioModelo.UsuarioModelo;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
@@ -37,6 +41,7 @@ public class Formulario extends javax.swing.JFrame {
         String columnas[] = {"Idpersona", "Nombre", "Equipo", "Nacimiento", "Ruta"};
         modelot = new DefaultTableModel(null, columnas);
         List<UsuarioModelo> lista = admin.Consultar();
+        String ruta;
         for (int i = 0; i < lista.size(); i++) {
             UsuarioModelo modelo = lista.get(i);
             modelot.addRow(columnas);
@@ -45,6 +50,9 @@ public class Formulario extends javax.swing.JFrame {
             modelot.setValueAt(modelo.getEquipo(),          i, 2);
             modelot.setValueAt(modelo.getNacimiento(),      i, 3);
             modelot.setValueAt(modelo.getRuta(),            i, 4);
+            
+            
+           
             
         }
         tbTabla.setModel(modelot);
@@ -64,6 +72,18 @@ public class Formulario extends javax.swing.JFrame {
         txtNacimiento.setText((modelo.getNacimiento().toString()));
         txtRuta.setText(String.valueOf(modelo.getRuta()));
         txtIdPersona.setText(String.valueOf(modelo.getIdpersona()));
+        String ruta;
+        
+        ruta =  modelo.getRuta();
+        
+        BufferedImage Original = null;
+        try {
+            Original = ImageIO.read(new File(txtRuta.getText()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        lbImagen.setIcon(new ImageIcon(Original));
+        lbImagen.setVisible(true);
     }
     
     private void Guardar() {
@@ -84,7 +104,7 @@ public class Formulario extends javax.swing.JFrame {
         modelo.setNombre(txtNombre.getText());
         modelo.setRuta(txtRuta.getText());
         modelo.setIdpersona(Integer.parseInt(txtIdPersona.getText()));
-         modelo.setNacimiento(java.sql.Date.valueOf(txtNacimiento.getText()));
+        modelo.setNacimiento(java.sql.Date.valueOf(txtNacimiento.getText()));
         admin.Actualizar(modelo);
     }
     private void Eliminar() {
@@ -146,6 +166,39 @@ public class Formulario extends javax.swing.JFrame {
             }   
         
     }
+    }
+    
+    private void MostrarGaleria(){
+        
+        //frame
+        JFrame form = new JFrame();
+        form.setSize(800,600);
+        
+        JPanel panel = new JPanel();
+
+        //datos
+        List<UsuarioModelo> lista = admin.Consultar();
+        
+        
+        String ruta;
+        //recorrer la ruta
+        
+        for (int i = 0; i < lista.size(); i++) {
+           UsuarioModelo modelo = lista.get(i); 
+           
+           ruta =  modelo.getRuta();
+           JLabel  imagen  = new JLabel(new ImageIcon(ruta));
+           
+           panel.add(imagen);
+           //System.out.println(modelo.getRuta());
+        }
+        
+        form.add(panel);
+        form.setVisible(true);
+        
+        
+        
+        
     }
 
     /**
@@ -382,6 +435,7 @@ public class Formulario extends javax.swing.JFrame {
     private void btnCargarImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarImagenActionPerformed
         // TODO add your handling code here:
         CargarImagen();
+        
     }//GEN-LAST:event_btnCargarImagenActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
@@ -390,7 +444,7 @@ public class Formulario extends javax.swing.JFrame {
 
     private void btGaleriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGaleriaActionPerformed
         // TODO add your handling code here:
-        CargarImagen();
+        MostrarGaleria();
     }//GEN-LAST:event_btGaleriaActionPerformed
 
     private void tbTablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTablaMouseClicked
